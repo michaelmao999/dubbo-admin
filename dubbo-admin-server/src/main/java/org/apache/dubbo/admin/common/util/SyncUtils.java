@@ -123,7 +123,15 @@ public class SyncUtils {
             }
         } else {
             Map<String, URL> map = urls.get(s);
-            filterFromUrls(map, ret, filter);
+            if ((map == null || map.isEmpty()) && s.indexOf(":") < 0) {
+                for (Map.Entry<String, Map<String, URL>> entry : urls.entrySet()) {
+                    if (entry.getKey().startsWith(s)) {
+                        filterFromUrls(entry.getValue(), ret, filter);
+                    }
+                }
+            } else {
+                filterFromUrls(map, ret, filter);
+            }
         }
 
         return ret;
