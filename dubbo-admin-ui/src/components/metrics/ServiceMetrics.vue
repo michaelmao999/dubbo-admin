@@ -330,7 +330,7 @@
     * */
     methods: {
       submit: function () {
-        this.searchByIp(this.filter, true)
+        this.searchByIp(this.filter, false)
       },
       searchByIp: function (filter, rewrite) {
         if (this.filter === '') {
@@ -362,7 +362,7 @@
       dealThreadPoolData: function (data) {
         for (let index in data) {
           let metricsDTO = data[index]
-          if ((metricsDTO['metric']).indexOf('threadPool') >= -1) {
+          if ((metricsDTO['metric']).indexOf('threadPool') !== -1) {
             let metric = metricsDTO['metric'].substring(metricsDTO['metric'].lastIndexOf('.') + 1)
             if (metric === 'active' || metric === 'current') {
               let trending = metric + '_trending'
