@@ -71,6 +71,10 @@ public class NacosConfiguration implements GovernanceConfiguration {
                 ":" +
                 url.getPort() // Port
                 ;
+        String backup = url.getParameter("backup");
+        if (backup != null && backup.length() > 0) {
+            serverAddr += "," + backup;
+        }
         properties.put(SERVER_ADDR, serverAddr);
     }
 
