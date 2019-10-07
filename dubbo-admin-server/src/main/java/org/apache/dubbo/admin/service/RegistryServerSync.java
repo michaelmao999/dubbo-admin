@@ -156,7 +156,7 @@ public class RegistryServerSync implements InitializingBean, DisposableBean, Not
             } else {// Fix map can not be cleared when service is unregistered: when a unique “group/service:version” service is unregistered, but we still have the same services with different version or group, so empty protocols can not be invoked.
                 Set<String> keys = new HashSet<String>(services.keySet());
                 for (String key : keys) {
-                    if (Tool.getInterface(key).equals(interfaceName) && !categoryEntry.getValue().entrySet().contains(key)) {
+                    if (Tool.getInterface(key).equals(interfaceName) && !categoryEntry.getValue().containsKey(key)) {
                         services.remove(key);
                     }
                 }
