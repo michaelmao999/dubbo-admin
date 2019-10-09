@@ -16,17 +16,18 @@
  */
 package com.alibaba.dubbo.registry.simple;
 
-import com.alibaba.dubbo.common.Constants;
-import com.alibaba.dubbo.common.URL;
-import com.alibaba.dubbo.common.logger.Logger;
-import com.alibaba.dubbo.common.logger.LoggerFactory;
-import com.alibaba.dubbo.common.utils.ConcurrentHashSet;
-import com.alibaba.dubbo.common.utils.NetUtils;
-import com.alibaba.dubbo.common.utils.UrlUtils;
-import com.alibaba.dubbo.registry.NotifyListener;
-import com.alibaba.dubbo.registry.RegistryService;
-import com.alibaba.dubbo.registry.support.AbstractRegistry;
-import com.alibaba.dubbo.rpc.RpcContext;
+
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.common.logger.Logger;
+import org.apache.dubbo.common.logger.LoggerFactory;
+import org.apache.dubbo.common.utils.ConcurrentHashSet;
+import org.apache.dubbo.common.utils.NetUtils;
+import org.apache.dubbo.common.utils.UrlUtils;
+import org.apache.dubbo.registry.NotifyListener;
+import org.apache.dubbo.registry.RegistryService;
+import org.apache.dubbo.registry.support.AbstractRegistry;
+import org.apache.dubbo.rpc.RpcContext;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -111,8 +112,8 @@ public class SimpleRegistryService extends AbstractRegistry {
     }
 
     public void unsubscribe(URL url, NotifyListener listener) {
-        if (!Constants.ANY_VALUE.equals(url.getServiceInterface())
-                && url.getParameter(Constants.REGISTER_KEY, true)) {
+        if (!"*".equals(url.getServiceInterface())
+                && url.getParameter("register", true)) {
             unregister(url);
         }
         String client = RpcContext.getContext().getRemoteAddressString();
@@ -150,7 +151,7 @@ public class SimpleRegistryService extends AbstractRegistry {
     }
 
     protected void subscribed(final URL url, final NotifyListener listener) {
-        if (Constants.ANY_VALUE.equals(url.getServiceInterface())) {
+        if ("*".equals(url.getServiceInterface())) {
             new Thread(new Runnable() {
                 public void run() {
                     Map<String, List<URL>> map = new HashMap<String, List<URL>>();

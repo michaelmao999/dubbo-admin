@@ -25,7 +25,9 @@ limitations under the License.
         <property name="location" value="classpath:conf/dubbo.properties"/>
     </bean>
 
-    <bean id="monitorService" class="com.alibaba.dubbo.monitor.simple.SimpleMonitorService">
+<!--    <bean id="monitorService" class="com.alibaba.dubbo.monitor.simple.SimpleMonitorService">-->
+<!--    </bean>-->
+    <bean id="monitorService" class="org.apache.dubbo.monitor.simple.SimpleDubboMonitorService">
     </bean>
 
     <dubbo:application name="${dubbo.application.name}" owner="${dubbo.application.owner}"/>
@@ -34,8 +36,12 @@ limitations under the License.
 
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
-    <dubbo:service interface="com.alibaba.dubbo.monitor.MonitorService" ref="monitorService" delay="-1"/>
+<!--    <dubbo:service interface="com.alibaba.dubbo.monitor.MonitorService" ref="monitorService" delay="-1"/>-->
+    <dubbo:service interface="org.apache.dubbo.monitor.MonitorService" ref="monitorService" delay="-1"/>
 
-    <dubbo:reference id="registryService" interface="com.alibaba.dubbo.registry.RegistryService"/>
+    <dubbo:reference id="registryService" interface="org.apache.dubbo.registry.RegistryService"/>
+
+    <dubbo:registry address="nacos://10.51.130.133:8848?backup=192.168.200.1:8848,192.168.129.1:8848"/>
+
 
 </beans>
