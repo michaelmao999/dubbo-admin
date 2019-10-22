@@ -348,6 +348,11 @@
         this.readonly = false
       },
       openDialog: function () {
+        if (this.selected === 0) {
+          this.service = this.filter
+        } else if (this.selected === 1) {
+          this.application = this.filter
+        }
         this.dialog = true
       },
       openWarn: function (title, text) {

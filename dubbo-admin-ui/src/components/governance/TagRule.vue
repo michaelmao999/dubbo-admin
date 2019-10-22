@@ -197,6 +197,7 @@
         this.readonly = false
       },
       openDialog: function () {
+        this.application = this.filter
         this.dialog = true
       },
       openWarn: function (title, text) {

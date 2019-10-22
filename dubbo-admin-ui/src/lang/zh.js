@@ -144,7 +144,7 @@ export default {
   success: ' 成功',
   fail: '失败',
   detail: '详情',
-  more: '更多',
+  more: '服务治理',
   copyUrl: '复制 URL',
   copy: '复制',
   url: 'URL',

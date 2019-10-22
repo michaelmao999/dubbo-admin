@@ -385,14 +385,27 @@ export default {
       this.$refs.modalForm.reset()
     },
     toCreate () {
-      Object.assign(this.modal, {
-        enable: true,
-        title: 'Create New',
-        saveBtn: 'Create',
-        readonly: false,
-        content: this.modal.template,
-        click: this.createItem
-      })
+      if (this.selected === 0) {
+        Object.assign(this.modal, {
+          enable: true,
+          title: 'Create New',
+          saveBtn: 'Create',
+          service: this.filter,
+          readonly: false,
+          content: this.modal.template,
+          click: this.createItem
+        })
+      } else if (this.selected === 1) {
+        Object.assign(this.modal, {
+          enable: true,
+          title: 'Create New',
+          saveBtn: 'Create',
+          application: this.filter,
+          readonly: false,
+          content: this.modal.template,
+          click: this.createItem
+        })
+      }
     },
     createItem () {
       // let doc = yaml.load(this.modal.content)
